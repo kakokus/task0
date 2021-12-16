@@ -10,10 +10,14 @@ import UIKit
 class SecondViewController: UIViewController {
 
     var id: String?
+    var recievedTextFromViewController: String = ""
+    @IBOutlet weak var textField: UILabel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         print("dcfscf" + id!)
+        
+        textField.text = recievedTextFromViewController
         // Do any additional setup after loading the view.
     }
     

@@ -6,20 +6,30 @@
 //
 
 import UIKit
+import SwiftUI
 
 class ViewController: UIViewController {
 
+    @IBOutlet weak var textField: UITextField!
     var id: String?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         
+        
          // Do any additional setup after loading the view.
     }
     
     @IBAction func openTrashDidTap(_ sender: Any) {
-        performSegue(withIdentifier: "openTrash", sender: self)
+        if textField.text?.trimmingCharacters(in: .whitespaces) != "" {
+            performSegue(withIdentifier: "openTrash", sender: self)
+        } else {
+            let alert = UIAlertController(title: "Error", message: "Cannot send empty data!", preferredStyle: .alert)
+            let action = UIAlertAction(title: "Ok", style: .cancel)
+            alert.addAction(action)
+            self.present(alert, animated: true, completion: nil)
+        }
         
     }
     
@@ -27,7 +37,10 @@ class ViewController: UIViewController {
         if segue.destination is SecondViewController {
             let vc = segue.destination as? SecondViewController
             vc?.id = "randomString <3"
+    
+            vc?.recievedTextFromViewController = textField.text!
         }
+        
         
     }
     
